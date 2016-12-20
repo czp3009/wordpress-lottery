@@ -1,0 +1,23 @@
+button.lottery_button, button.lottery_button[disabled]:hover {
+    background: #1a1a1a;
+    border: 0;
+    border-radius: 2px;
+    color: #fff;
+    font-family: Montserrat, "Helvetica Neue", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.046875em;
+    line-height: 1;
+    padding: 0.84375em 0.875em 0.78125em;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button.lottery_button[disabled] {
+    cursor: default;
+    opacity: .5;
+}
+
+button.lottery_button:hover, button.lottery_button:focus {
+    background: #007acc;
+}
