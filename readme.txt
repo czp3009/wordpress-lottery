@@ -2,9 +2,9 @@
 Contributors: czp3009
 Donate link: https://www.hiczp.com/
 Tags: comments, spam
-Requires at least: 0.1
-Tested up to: 0.1
-Stable tag: 0.1
+Requires at least: 0.2
+Tested up to: 0.2
+Stable tag: 0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,7 +23,7 @@ Here is a short description of the plugin.  This should be no more than 150 char
 <button class="lottery_button" type="button">欧洲人检测</button>
 <div id="canvas"></div>
 4.保存文章, 返回前台查看文章
-5.在输入框中输入获奖名额并点击按钮
+5.登录 WordPress 后, 在输入框中输入获奖名额并点击按钮
 
 == Frequently Asked Questions ==
 
@@ -36,6 +36,9 @@ An answer to that question.
 Answer to foo bar dilemma.
 
 == Changelog ==
+
+= 0.2 =
+登录 WordPress 后才能抽奖
 
 = 0.1 =
 完成基础功能

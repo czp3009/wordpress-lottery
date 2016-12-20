@@ -39,6 +39,13 @@ lottery_button.click(function () {
         },
         success: function (data) {
             canvas_div.html("");
+
+            //未登录
+            if (data == 0) {
+                canvas_div.html("登陆后才能检测血统");
+                return;
+            }
+
             if (data.code != 0) {
                 canvas_div.html(data.result);
             } else {
