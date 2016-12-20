@@ -2,9 +2,9 @@
 Contributors: czp3009
 Donate link: https://www.hiczp.com/
 Tags: comments, spam
-Requires at least: 0.2
-Tested up to: 0.2
-Stable tag: 0.2
+Requires at least: 0.3
+Tested up to: 0.3
+Stable tag: 0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,9 @@ An answer to that question.
 Answer to foo bar dilemma.
 
 == Changelog ==
+
+= 0.3 =
+增加前台数据验证
 
 = 0.2 =
 登录 WordPress 后才能抽奖

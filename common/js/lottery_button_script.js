@@ -10,15 +10,26 @@ var post_id = defined.post_id;
 var user_count_input = jQuery("#user_count");
 var lottery_button = jQuery(".lottery_button");
 var canvas_div = jQuery("#canvas");
+var can_modify = false;
 
 lottery_button.prop("disabled", true);
 
 user_count_input.keyup(function () {
-    //获奖人数 为空时, 禁止提交
-    if (user_count_input.val() != "") {
-        lottery_button.prop("disabled", false);
-    } else {
+    //获奖人数 为空或为0或不为数字时, 禁止提交
+    if (user_count_input.val() == "") {
         lottery_button.prop("disabled", true);
+        if (can_modify) {
+            canvas_div.html("");
+        }
+    } else if (parseInt(user_count_input.val()) == 0 || isNaN(parseInt(user_count_input.val()))) {
+        lottery_button.prop("disabled", true);
+        canvas_div.html("参数非法");
+        can_modify = true;
+    } else {
+        lottery_button.prop("disabled", false);
+        if (can_modify) {
+            canvas_div.html("");
+        }
     }
 });
 
@@ -43,11 +54,13 @@ lottery_button.click(function () {
             //未登录
             if (data == 0) {
                 canvas_div.html("登陆后才能检测血统");
+                can_modify = true;
                 return;
             }
 
             if (data.code != 0) {
                 canvas_div.html(data.result);
+                can_modify = true;
             } else {
                 data.result.forEach(function (winner) {
                     canvas_div.append(
@@ -58,6 +71,7 @@ lottery_button.click(function () {
                         "</p>"
                     );
                 });
+                can_modify = false;
             }
         }
     });
