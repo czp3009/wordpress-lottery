@@ -2,9 +2,9 @@
 Contributors: czp3009
 Donate link: https://www.hiczp.com/
 Tags: comments, spam
-Requires at least: 0.3
-Tested up to: 0.3
-Stable tag: 0.3
+Requires at least: 1.0
+Tested up to: 1.0
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,10 @@ An answer to that question.
 Answer to foo bar dilemma.
 
 == Changelog ==
+
+= 1.0 =
+加入 GitHub 链接
+正式发布
 
 = 0.3 =
 增加前台数据验证

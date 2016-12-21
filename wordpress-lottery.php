@@ -8,9 +8,9 @@
 
 /*
 Plugin Name: WordPress Lottery
-Plugin URI: 暂无
+Plugin URI: https://github.com/czp3009/wordpress-lottery
 Description: 欧洲人检测器
-Version: 0.3
+Version: 1.0
 Author: czp
 Author URI: https://www.hiczp.com
 License: GPL2
