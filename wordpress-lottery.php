@@ -10,13 +10,13 @@
 Plugin Name: WordPress Lottery
 Plugin URI: https://github.com/czp3009/wordpress-lottery
 Description: 欧洲人检测器
-Version: 1.1
+Version: 1.2
 Author: czp
 Author URI: https://www.hiczp.com
 License: GPL2
 */
 
-/*  Copyright 2016  czp3009  (email : czp3009@gmail.com)
+/*  Copyright 2017  czp3009  (email : czp3009@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,6 +39,19 @@ define("WORDPRESS_LOTTERY_DIR_URL", plugin_dir_url(__FILE__));
 
 class wordPressLottery
 {
+    public function content_filter($content)
+    {
+        return str_replace(
+            "[wordpress_lottery]",
+            "<form>" .
+            "<input name='user_count' type='text' placeholder='获奖名额' />" .
+            "<button class='lottery_button' type='button'>欧洲人检测</button>" .
+            "<div class='canvas'></div>" .
+            "</form>",
+            $content
+        );
+    }
+
     public function load()
     {
         //仅在文章页面加载
@@ -115,5 +128,6 @@ class wordPressLottery
 }
 
 $wordpress_lottery = new wordPressLottery();
+add_filter("the_content", array($wordpress_lottery, "content_filter"));
 add_action("wp_enqueue_scripts", array($wordpress_lottery, "load"));
 add_action("wp_ajax_wordpress_lottery_doLottery", array($wordpress_lottery, "doLottery"));

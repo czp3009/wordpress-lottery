@@ -2,9 +2,9 @@
 Contributors: czp3009
 Donate link: https://www.hiczp.com/
 Tags: comments, spam
-Requires at least: 1.1
-Tested up to: 1.1
-Stable tag: 1.1
+Requires at least: 1.2
+Tested up to: 1.2
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,14 +18,7 @@ Here is a short description of the plugin.  This should be no more than 150 char
 
 1. Upload the plugin files to the `/wp-content/plugins/plugin-name` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
-3.在一篇文章中插入如下 html 语句
-
-<form>
-    <input name="user_count" type="text" placeholder="获奖名额" />
-    <button class="lottery_button" type="button">欧洲人检测</button>
-    <div class="canvas"></div>
-</form>
-
+3.在一篇文章中插入如下字符串 [wordpress_lottery]
 4.保存文章, 返回前台查看文章
 5.登录 WordPress 后, 在输入框中输入获奖名额并点击按钮
 
@@ -41,8 +34,11 @@ Answer to foo bar dilemma.
 
 == Changelog ==
 
+= 1.2 =
+用户只需要插入一条短字符串, 使用更加简便
+
 = 1.1 =
-支持一个页面内存在多个抽奖表单，并互不影响
+支持一个页面内存在多个抽奖表单, 并互不影响
 
 = 1.0 =
 加入 GitHub 链接
