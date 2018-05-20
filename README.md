@@ -11,4 +11,4 @@ https://wordpress.org/plugins/wp-lottery
 # 使用
 在一篇文章中插入如下字符串 [wordpress_lottery] , 保存文章后至前台访问该文章.
 
-输入获奖名额并点击按钮开始抽奖(需登录WordPress).
+输入获奖名额并点击按钮开始抽奖.

@@ -3,8 +3,8 @@ Contributors: czp3009
 Donate link: https://www.hiczp.com/
 Tags: comments, spam
 Requires at least: 4.0.0
-Tested up to: 4.7.5
-Stable tag: 4.7.5
+Tested up to: 4.9.6
+Stable tag: 4.9.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,17 +16,20 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Installation ==
 
-1.安装插件
+1 安装插件
 
-2.启用插件
+2 启用插件
 
-3.在一篇文章中插入如下字符串 [wordpress_lottery]
+3 在一篇文章中插入如下字符串 [wordpress_lottery]
 
-4.保存文章, 返回前台查看文章
+4 保存文章, 返回前台查看文章
 
-5.登录 WordPress 后, 在输入框中输入获奖名额并点击按钮
+5 在输入框中输入获奖名额并点击按钮
 
 == Changelog ==
+
+= 2.0 =
+更正部分样式, 优化代码结构, 增加设置页面
 
 = 1.5 =
 更正 readme
