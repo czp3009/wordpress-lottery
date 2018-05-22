@@ -30,18 +30,17 @@ License: GPL2
 define('WORDPRESS_LOTTERY_DIR_PATH', plugin_dir_path(__FILE__));
 define('WORDPRESS_LOTTERY_DIR_URL', plugin_dir_url(__FILE__));
 
+//设置页面
+include WORDPRESS_LOTTERY_DIR_PATH . 'options.php';
+/** @noinspection PhpUndefinedClassInspection */
+add_action('admin_menu', array(new WordPressLotterySettingPage(), 'createMenu'));
+
 /** @noinspection PhpUndefinedClassInspection */
 
 class WordPressLottery
 {
     const REPLACED_TEXT = '[wordpress_lottery]';
-    const REPLACE_TEXT =
-        "<div class='wordpress-lottery-container'>" .
-        "<input class='wordpress-lottery-input' type='text' placeholder='获奖名额' />" .
-        "<button class='wordpress-lottery-button' type='button' >欧洲人检测</button>" .
-        "<div class='wordpress-lottery-loader' hidden></div>" .
-        "<div class='wordpress-lottery-canvas'></div>" .
-        "</div>";
+
     const SCRIPT_HANDLE = 'wordpress-lottery-script';
     const SCRIPT_FILE_URL = WORDPRESS_LOTTERY_DIR_URL . 'common/js/wordpress-lottery.js';
     const STYLE_HANDLE = 'wordpress-lottery-style';
@@ -49,10 +48,20 @@ class WordPressLottery
 
     public function contentFilter($content)
     {
+        $replaceText = '';
         //在首页中不起效
+        if (!is_home()) {
+            $replaceText =
+                "<div class='wordpress-lottery-container'>" .
+                "<input class='wordpress-lottery-input " . get_option('wordpress_lottery_custom_input_class', '') . "' type='text' placeholder='获奖名额' style='" . get_option('wordpress_lottery_custom_input_style', '') . "'/>" .
+                "<button class='wordpress-lottery-button " . get_option('wordpress_lottery_custom_button_class', '') . "' type='button'  style='" . get_option('wordpress_lottery_custom_button_style', '') . "'>欧洲人检测</button>" .
+                "<div class='wordpress-lottery-loader' hidden></div>" .
+                "<div class='wordpress-lottery-canvas'></div>" .
+                "</div>";
+        }
         return str_replace(
             self::REPLACED_TEXT,
-            is_home() ? '' : self::REPLACE_TEXT,
+            $replaceText,
             $content
         );
     }
@@ -83,6 +92,14 @@ class WordPressLottery
     //处理 ajax, 返回获奖者
     public function doLottery()
     {
+        if (get_option('wordpress_lottery_admin_required')) {
+            if (!current_user_can('manage_options')) {
+                wp_send_json_error(array(
+                    'message' => '仅管理员可用'
+                ));
+            }
+        }
+
         $postId = intval($_POST['postId']);
         $winnerCount = intval($_POST['winnerCount']);
 
@@ -95,6 +112,7 @@ class WordPressLottery
 
         //获奖人数超过了楼层数
         global $wpdb;
+        /** @noinspection SqlResolve */
         $commentCount = $wpdb->get_var("SELECT COUNT(*) FROM $wpdb->comments WHERE `comment_post_ID` = $postId AND `comment_parent` = 0 AND `comment_approved` = 1");
         if ($winnerCount > $commentCount) {
             wp_send_json_error(array(
@@ -103,6 +121,7 @@ class WordPressLottery
         }
 
         //取出回复贴, 随机排序取首部 N 个
+        /** @noinspection SqlResolve */
         $winners = $wpdb->get_results("SELECT * FROM $wpdb->comments WHERE `comment_post_ID` = $postId AND `comment_parent` = 0 AND `comment_approved` = 1");
         shuffle($winners);
         $winners = array_slice($winners, 0, $winnerCount);
@@ -123,4 +142,8 @@ class WordPressLottery
 $wordpressLottery = new WordPressLottery();
 add_filter('the_content', array($wordpressLottery, 'contentFilter'));
 add_action('wp_enqueue_scripts', array($wordpressLottery, 'load'));
-add_action('wp_ajax_nopriv_wordpress_lottery_doLottery', array($wordpressLottery, 'doLottery'));
+
+add_action('wp_ajax_wordpress_lottery_doLottery', array($wordpressLottery, 'doLottery'));
+if (!get_option('wordpress_lottery_login_required')) {
+    add_action('wp_ajax_nopriv_wordpress_lottery_doLottery', array($wordpressLottery, 'doLottery'));
+}

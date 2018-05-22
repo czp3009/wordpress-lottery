@@ -22,7 +22,12 @@ document.querySelectorAll('.wordpress-lottery-container').forEach(container => {
         urlSearchParams.append('winnerCount', input.value);
 
         //admin-ajax 仅支持 formData
-        fetch(ajaxUrl, {method: 'POST', body: urlSearchParams})
+        fetch(ajaxUrl, {
+                method: 'POST',
+                credentials: 'same-origin',
+                body: urlSearchParams
+            }
+        )
             .then(response => {
                 if (!response.ok) {
                     if (response.status === 400) {
